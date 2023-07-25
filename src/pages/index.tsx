@@ -1,13 +1,38 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import Confetti from 'react-confetti'
+import { useEffect, useState } from 'react'
+// import useWindowSize from 'react-use/lib/useWindowSize'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  // const { width, height } = useWindowSize()
+
+  const [off, setOff] = useState(true)
+  const [joss, setJoss] = useState({
+    h: 0, w: 0
+  })
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      let h = window.innerHeight
+      let w = window.innerWidth
+      setJoss({ h, w })
+    }
+    setTimeout(() => { setOff(false) }, 4000)
+  }, []);
+
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
+      <Confetti
+        width={joss.w || 300}
+        height={joss.h || 200}
+        recycle={!!off}
+        numberOfPieces={500}
+      />
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
