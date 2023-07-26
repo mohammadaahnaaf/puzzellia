@@ -5,7 +5,7 @@ type Props = {}
 
 export const Header = (props: Props) => {
   return (
-    <div className='bg-pink-300'>
+    <div className='bg-pink-200'>
       <header className='max-w-6xl w-full mx-auto grid'>
         <div className='p-2 flex items-center gap-4'>
           <div className='relative w-[64px] h-[64px]'>

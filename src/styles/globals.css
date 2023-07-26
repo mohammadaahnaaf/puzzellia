@@ -34,3 +34,7 @@ body {
 .custom-spin {
   animation: spin-custom 3s linear infinite; /* Adjust the duration (2s) to change the speed */
 }
+
+.kufi-font {
+  font-family: 'Reem Kufi', sans-serif;
+}
