@@ -16,6 +16,11 @@
   }
 }
 
+@keyframes spin-custom {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -24,4 +29,8 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+.custom-spin {
+  animation: spin-custom 3s linear infinite; /* Adjust the duration (2s) to change the speed */
 }

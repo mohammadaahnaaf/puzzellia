@@ -7,7 +7,7 @@ type Props = {
 
 export const Layout = (props: Props) => {
     return (
-        <div>
+        <div className='bg-white text-black'>
             <Header />
             {props.children}
             <Footer />
