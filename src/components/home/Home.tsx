@@ -39,6 +39,7 @@ export const Home = (props: Props) => {
           return (
             <GameCard
               key={index}
+              icon={g.icon}
               title={g.title}
               subtitle={g.subtitle}
               link={g.link} />
