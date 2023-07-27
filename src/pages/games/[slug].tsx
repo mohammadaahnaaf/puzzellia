@@ -12,7 +12,6 @@ const GamePage = (props: Props) => {
   return (
     <>
       <Thermometer />
-      
     </>
   )
 }
