@@ -77,7 +77,7 @@ export const Thermometer = (props: Props) => {
                         <ThermoSVG temps={temps} shows={shows} />
                     </div>
                     {temps?.temp1 !== undefined && (
-                        <button onClick={() => setShows(!shows)} type='button' className='px-2 py-1 shadow-lg hover:bg-pink-600 hover:text-white bg-pink-200 justify-self-center rounded-md w-24 text-center flex justify-center text-pink-600'>
+                        <button onClick={() => setShows(!shows)} type='button' className='px-2 py-1 shadow-lg hover:bg-pink-600 hover:text-white bg-pink-200 justify-self-center items-center rounded-md w-24 text-center flex justify-center text-pink-600'>
                             {shows ? (
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                                     <path d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z" />
