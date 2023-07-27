@@ -72,8 +72,8 @@ export const Thermometer = (props: Props) => {
                 <div className='col-span-5'>
                     <h1 className='px-4 py-2 text-xl text-pink-600'>Thermometer</h1>
                 </div>
-                <div className='grid col-span-5 lg:col-span-3 p-4 justify-center bg-pink-50 gap-4 rounded-lg shadow-lg'>
-                    <div className='max-h-80'>
+                <div className='grid col-span-5 w-full lg:col-span-3 p-4 justify-center bg-pink-50 gap-4 rounded-lg shadow-lg'>
+                    <div className='max-h-[46vh] w-[50vh]'>
                         <ThermoSVG temps={temps} shows={shows} />
                     </div>
                     {temps?.temp1 !== undefined && (
@@ -126,7 +126,7 @@ export const Thermometer = (props: Props) => {
                     </div>
                 </div>
 
-                <div className='col-span-5 md:px-0 px-4 py-10 flex flex-wrap gap-4 justify-center bg-pink-50 rounded-lg w-full'>
+                <div className='col-span-5 p-4 flex flex-wrap gap-4 justify-center bg-pink-50 rounded-lg w-full'>
                     {boards?.map((x: any, index: number) => (
                         <div id={`canvas${index + 1}`} key={index} className='max-h-[45vh] w-full flex justify-center items-center rounded-md bg-pink-200 shadow-lg'>
                             <ThermoSVG temps={x} shows={shows} />
