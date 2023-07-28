@@ -1,6 +1,8 @@
 import React from 'react'
 import { Thermoc } from './boardData'
 import { ThermoSVG } from './ThermoSVG'
+import { Boards } from '.'
+import Image from 'next/image'
 // import html2canvas from 'html2canvas';
 
 type Props = {}
@@ -11,6 +13,7 @@ export const Thermometer = (props: Props) => {
     const [boards, setBoards] = React.useState<any>([])
     const [shows, setShows] = React.useState<boolean>(false)
     const [limit, setLimit] = React.useState<number>(1)
+    const [name, setName] = React.useState<string>("Thermometer")
 
     // create sample 
     async function create() {
@@ -40,7 +43,7 @@ export const Thermometer = (props: Props) => {
 
             const link = document.createElement('a');
             link.href = url;
-            link.download = 'canvas.svg';
+            link.download = `${name}-${i}.svg`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -64,20 +67,28 @@ export const Thermometer = (props: Props) => {
         // link.click();
         // document.body.removeChild(link);
     }
-
+    let mojud = temps?.temp1 !== undefined
     return (
         <div className='min-h-screen h-full'>
             <div className='grid grid-cols-5 max-w-6xl w-full gap-4 mx-auto p-4'>
 
                 <div className='col-span-5'>
-                    <h1 className='px-4 py-2 text-xl text-pink-600'>Thermometer</h1>
+                    <h1 className='px-4 py-2 text-2xl font-bold text-[#EE2345]'>Thermometer</h1>
                 </div>
                 <div className='grid col-span-5 w-full lg:col-span-3 p-4 justify-center bg-pink-50 gap-4 rounded-lg shadow-lg'>
-                    <div className='max-h-[46vh] w-[50vh]'>
-                        <ThermoSVG temps={temps} shows={shows} />
-                    </div>
-                    {temps?.temp1 !== undefined && (
-                        <button onClick={() => setShows(!shows)} type='button' className='px-2 py-1 shadow-lg hover:bg-pink-600 hover:text-white bg-pink-200 justify-self-center items-center rounded-md w-24 text-center flex justify-center text-pink-600'>
+                    {mojud ? (
+                        <div className='max-h-[46vh] w-[50vh]'>
+                            <ThermoSVG temps={temps} shows={shows} />
+                        </div>
+                    ) : (
+                        <div className='flex items-center'>
+                            <div className='relative h-40 w-40 mx-auto'>
+                                <Image fill src='/icons/thermometer.svg' className='object-center h-full w-full' alt='games-icon' />
+                            </div>
+                        </div>
+                    )}
+                    {mojud && (
+                        <button onClick={() => setShows(!shows)} type='button' className='px-2 py-1 shadow-lg hover:bg-pink-600 hover:text-white bg-pink-200 justify-self-center items-center rounded-md h-10 w-24 text-center flex justify-center text-pink-600'>
                             {shows ? (
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                                     <path d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z" />
@@ -96,8 +107,14 @@ export const Thermometer = (props: Props) => {
                 </div>
 
 
-                <div className='col-span-5 lg:col-span-2 p-4 grid gap-2 items-start bg-pink-50 rounded-lg'>
-                    <h1 className='px-4 py-2 text-xl text-center text-pink-600'>Thermometer</h1>
+                <div className='col-span-5 lg:col-span-2 p-4 grid gap-2 items-start bg-pink-50 shadow-lg rounded-lg'>
+                    {/* <h1 className='px-4 py-2 text-xl text-center text-pink-600'>Thermometer</h1> */}
+
+                    <div className='w-full p-4 bg-white rounded-md'>
+                        <label htmlFor="name" className="flex pb-1 text-sm font-medium text-pink-600">Board Name</label>
+                        <input type="text" value={name || ""} onChange={(e) => setName(e.target.value)} id="name" className="bg-pink-50 border border-pink-300 text-pink-600 placeholder:text-pink-300 text-sm rounded-sm outline-none border-none ring-1 focus:ring-2 ring-pink-600 w-full px-4 py-2" placeholder="enter a file name" required />
+                    </div>
+
                     <div className='flex gap-2 w-full p-4 bg-white rounded-md justify-between'>
                         <div className='w-full'>
                             <label htmlFor="celcius" className="flex pb-1 text-sm font-medium text-pink-600">Celcius</label>
@@ -126,13 +143,8 @@ export const Thermometer = (props: Props) => {
                     </div>
                 </div>
 
-                <div className='col-span-5 p-4 flex flex-wrap gap-4 justify-center bg-pink-50 rounded-lg w-full'>
-                    {boards?.map((x: any, index: number) => (
-                        <div id={`canvas${index + 1}`} key={index} className='max-h-[45vh] w-full flex justify-center items-center rounded-md bg-pink-200 shadow-lg'>
-                            <ThermoSVG temps={x} shows={shows} />
-                        </div>
-                    ))}
-                </div>
+                <Boards boards={boards} shows={shows} />
+
             </div>
         </div>
     )

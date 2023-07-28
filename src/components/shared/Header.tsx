@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 type Props = {}
@@ -11,7 +12,7 @@ export const Header = (props: Props) => {
           <div className='relative w-[64px] h-[64px]'>
             <Image src='/puzzellia.svg' className='object-fit h-full custom-spin' fill alt='puzzellia-logo' />
           </div>
-          <h1 className='text-xl font-bold text-[red]'>PUZZELLiA</h1>
+          <Link href='/' className='text-xl font-bold text-[#EE2345] hover:text-white'>PUZZELLiA</Link>
         </div>
 
       </header>
