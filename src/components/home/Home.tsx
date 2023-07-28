@@ -20,7 +20,7 @@ export const Home = (props: Props) => {
       <TopHeader />
 
       {/* Categoris  */}
-      <div className='grid grid-cols-4 justify-center gap-4 p-4 w-full'>
+      <div className='grid grid-cols-2 lg:grid-cols-4 justify-center gap-4 p-4 w-full'>
         {cats.map((c, index) => (
           <div key={index} className=''>
             <button
@@ -34,7 +34,7 @@ export const Home = (props: Props) => {
       </div>
 
       {/* Games Selections  */}
-      <div className='p-4 grid grid-cols-4 w-full justify-end gap-4'>
+      <div className='p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full justify-center gap-4'>
         {filteredItems.map((g, index) => {
           return (
             <GameCard

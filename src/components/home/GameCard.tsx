@@ -11,8 +11,8 @@ type Props = {
 
 export const GameCard = (props: Props) => {
     return (
-        <div>
-            <div className='relative grid content-center justify-center cursor-pointer text-pink-600 p-4 gap-4 w-full rounded-lg shadow-lg hover:bg-pink-100 ring-pink-400 hover:ring-2 bg-pink-50'>
+        <div className='col-span-1'>
+            <div className='relative grid content-center justify-center h-full cursor-pointer text-pink-600 p-4 gap-4 w-full rounded-lg shadow-lg hover:bg-pink-100 ring-pink-400 hover:ring-2 bg-pink-50'>
                 <div className='relative h-20 w-20 mx-auto'>
                     <Image fill src={props.icon} className='object-center h-full w-full' alt='games-icon' />
                 </div>
