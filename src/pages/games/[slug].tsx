@@ -1,17 +1,24 @@
-import { Thermometer } from '@puzzellia/games'
+// import { Thermometer } from '@puzzellia/games'
+import { games } from '@puzzellia/root/data'
+import { useRouter } from 'next/router'
 import React from 'react'
 
 type Props = {}
 
 const GamePage = (props: Props) => {
 
-  function generate() {
-    console.log('button clicked')
-  }
+  const router = useRouter()
+  const sluq = router.query.slug
 
   return (
     <>
-      <Thermometer />
+      {games?.map((x, index) => {
+        return x.link === sluq ? (
+          <div key={index}>
+            {x.gameia}
+          </div>
+        ) : null
+      })}
     </>
   )
 }
