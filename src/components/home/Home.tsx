@@ -20,11 +20,11 @@ export const Home = (props: Props) => {
       <TopHeader />
 
       {/* Categoris  */}
-      <div className='grid grid-cols-2 lg:grid-cols-4 justify-center gap-4 p-4 w-full'>
+      <div className='grid grid-cols-2 lg:grid-cols-4 justify-center gap-2 md:gap-4 p-4 w-full'>
         {cats.map((c, index) => (
-          <div key={index} className=''>
+          <div key={index}>
             <button
-              className='p-4 w-full ring-2 shadow-lg ring-red-400 text-xl text-pink-600 font-semibold hover:bg-red-400 hover:text-white rounded-md'
+              className='hover:scale-105 duration-300 p-2 lg:p-4 w-full bg-pink-50 shadow-lg text-sm sm:text-md lg:text-xl text-pink-600 font-semibold hover:bg-pink-100 hover:ring-2 ring-pink-400 rounded-sm'
               onClick={() => setCategory(c.value)}>
               {c.title}
             </button>

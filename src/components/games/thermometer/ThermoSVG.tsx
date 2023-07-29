@@ -18,7 +18,9 @@ export const ThermoSVG = (props: Props) => {
                 <path style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '3px', }} d="M105,209.85a21,21,0,1,0-42,0v537h42Z"
                     transform="translate(-34.42 -187.21)" />
                 {/* <rect style={{ fill: '#ed1c24' }} x="28.59" y="22.17" width="41.98" height="535.99" /> */}
-                <rect style={{ fill: "black" }} x="28.59" y={22.17 + (535.99 - 535.99 * temps.temp1 / 100)} width="41.98" height={535.99 * temps.temp1 / 100} />
+                <rect style={{ fill: "black", transition: "y 0.5s, height 0.5s" }} x="28.59" y={22.17 + (535.99 - 535.99 * temps.temp1 / 100)} width="41.98" height={535.99 * temps.temp1 / 100}
+
+                />
                 <g>
                     <line style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '2px', }} y1="22.17" x2="28.59" y2="22.17" />
                     <line style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '2px', }} y1="43.61" x2="28.59" y2="43.61" />
@@ -236,7 +238,7 @@ export const ThermoSVG = (props: Props) => {
                 {/* thermo-2 starts here */}
                 <path style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '3px', }} d="M289,209.85a21,21,0,1,0-42,0v537h42Z"
                     transform="translate(-34.42 -187.21)" />
-                <rect style={{ fill: "black" }} x="212.59" y={22.17 + (535.99 - 535.99 * temps.temp2 / 100)} width="41.98" height={535.99 * temps.temp2 / 100} />
+                <rect style={{ fill: "black", transition: "y 0.5s, height 0.5s" }} x="212.59" y={22.17 + (535.99 - 535.99 * temps.temp2 / 100)} width="41.98" height={535.99 * temps.temp2 / 100} />
                 <g>
                     <line style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '2px', }} x1="184" y1="22.17" x2="212.59" y2="22.17" />
                     <line style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '2px', }} x1="184" y1="43.61" x2="212.59" y2="43.61" />
@@ -455,7 +457,7 @@ export const ThermoSVG = (props: Props) => {
                 <path style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '3px', }} d="M473,209.85a21,21,0,1,0-42,0v537h42Z"
                     transform="translate(-34.42 -187.21)" />
 
-                <rect style={{ fill: "black" }} x="396.59" y={22.17 + (535.99 - 535.99 * temps.temp3 / 100)} width="41.98" height={535.99 * temps.temp3 / 100} />
+                <rect style={{ fill: "black", transition: "y 0.5s, height 0.5s" }} x="396.59" y={22.17 + (535.99 - 535.99 * temps.temp3 / 100)} width="41.98" height={535.99 * temps.temp3 / 100} />
                 <g>
                     <line style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '2px', }} x1="368" y1="22.17" x2="396.59" y2="22.17" />
                     <line style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '2px', }} x1="368" y1="43.61" x2="396.59" y2="43.61" />
@@ -674,7 +676,7 @@ export const ThermoSVG = (props: Props) => {
                 <path style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '3px', }} d="M657,209.85a21,21,0,1,0-42,0v537h42Z"
                     transform="translate(-34.42 -187.21)" />
 
-                <rect style={{ fill: "black" }} x="580.59" y={22.17 + (535.99 - 535.99 * temps.temp4 / 100)} width="41.98" height={535.99 * temps.temp4 / 100} />
+                <rect style={{ fill: "black", transition: "y 0.5s, height 0.5s" }} x="580.59" y={22.17 + (535.99 - 535.99 * temps.temp4 / 100)} width="41.98" height={535.99 * temps.temp4 / 100} />
                 <g>
                     <line style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '2px', }} x1="552" y1="22.17" x2="580.59" y2="22.17" />
                     <line style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '2px', }} x1="552" y1="43.61" x2="580.59" y2="43.61" />
