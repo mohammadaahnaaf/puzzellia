@@ -1,9 +1,11 @@
+
+
 export class Chadac {
 
     constructor() { }
 
     makeData() {
-        //create random data 
+        //create single random data 
         const angs = [];
         let a1 = 0
         let a2 = 0
@@ -22,13 +24,11 @@ export class Chadac {
 
     //create multi random data 
     makeMultiData(total: number) {
-        //create random data 
         const angs = [];
         let a1 = 0
         let a2 = 0
 
         for (let i = 0; i < total; i++) {
-            // Generate random angles until they are not equal
             do {
                 a1 = Math.floor(Math.random() * 179);
                 a2 = Math.floor(Math.random() * 179);
