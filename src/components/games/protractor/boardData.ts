@@ -1,65 +1,42 @@
-export class Thermoc {
+export class Chadac {
 
-    constructor() {
-        // this.total = total;
-    }
+    constructor() { }
 
-    //create a random data 
     makeData() {
+        //create random data 
+        const angs = [];
+        let a1 = 0
+        let a2 = 0
 
-        function generateUniqueRandom(existingNumbers: any[], low: number, high: number) {
-            let num;
+        for (let i = 0; i < 2; i++) {
+            // Generate random angles until they are not equal
             do {
-                num = Math.floor(Math.random() * (high - low + 1)) + low;
-            } while (existingNumbers.includes(num));
+                a1 = Math.floor(Math.random() * 179);
+                a2 = Math.floor(Math.random() * 179);
+            } while (a1 === 0 || a1 === 180 || a2 === 0 || a2 === 180 || a1 === a2 || a2 <= a1);
 
-            return num;
+            angs.push({ a1: a1, a2: a2 });
         }
-
-        // Generate 4 unique random numbers in the range of 0 to 100
-        let existingNumbers = [];
-        let temps: any = {};
-
-        for (let i = 1; i <= 4; i++) {
-            const num = generateUniqueRandom(existingNumbers, 0, 100);
-            existingNumbers.push(num);
-            temps[`temp${i}`] = num;
-        }
-        return temps
-
+        return angs;
     }
 
     //create multi random data 
     makeMultiData(total: number) {
+        //create random data 
+        const angs = [];
+        let a1 = 0
+        let a2 = 0
 
-        function make() {
-            function generateUniqueRandom(existingNumbers: any[], low: number, high: number) {
-                let num;
-                do {
-                    num = Math.floor(Math.random() * (high - low + 1)) + low;
-                } while (existingNumbers.includes(num));
+        for (let i = 0; i < total; i++) {
+            // Generate random angles until they are not equal
+            do {
+                a1 = Math.floor(Math.random() * 179);
+                a2 = Math.floor(Math.random() * 179);
+            } while (a1 === 0 || a1 === 180 || a2 === 0 || a2 === 180 || a1 === a2 || a2 <= a1);
 
-                return num;
-            }
-
-            // Generate 4 unique random numbers in the range of 0 to 100
-            let existingNumbers = [];
-            let temps: any = {};
-
-            for (let i = 1; i <= 4; i++) {
-                const num = generateUniqueRandom(existingNumbers, 0, 100);
-                existingNumbers.push(num);
-                temps[`temp${i}`] = num;
-            }
-            return temps
+            angs.push({ a1: a1, a2: a2 });
         }
-
-        let multiData = []
-        for (let i = 1; i <= total; i++) {
-            let x = make();
-            multiData.push(x);
-        }
-        return multiData
+        return angs;
     }
 
 }

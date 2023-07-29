@@ -18,7 +18,6 @@ export const ThermoSVG = (props: Props) => {
                 {/* thermo-1 starts here */}
                 <path style={{ fill: 'none', stroke: 'black', strokeMiterlimit: '10', strokeWidth: '3px', }} d="M105,209.85a21,21,0,1,0-42,0v537h42Z"
                     transform="translate(-34.42 -187.21)" />
-                {/* <rect style={{ fill: '#ed1c24' }} x="28.59" y="22.17" width="41.98" height="535.99" /> */}
                 <rect style={{ fill: "black", transition: "y 0.5s, height 0.5s" }} x="28.59" y={22.17 + (535.99 - 535.99 * temps.temp1 / 100)} width="41.98" height={535.99 * temps.temp1 / 100}
 
                 />

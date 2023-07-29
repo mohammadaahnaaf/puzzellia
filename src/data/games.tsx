@@ -1,4 +1,5 @@
 import { Maze, Thermometer } from '@puzzellia/games'
+import { Protractor } from '@puzzellia/games/protractor'
 
 interface GameItem {
     title: string
@@ -40,7 +41,7 @@ export const games: GameItem[] = [
         icon: '/icons/protractor.svg',
         link: 'protractor',
         cats: ['measuring', 'visual'],
-        gameia: <Thermometer />
+        gameia: <Protractor />
     },
     {
         title: "Number",

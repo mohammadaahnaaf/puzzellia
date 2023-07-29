@@ -1,2 +1,2 @@
-export * from './Thermometer'
-export * from './Boards'
+export * from './Protractor'
+export * from './ChadaBoards'
