@@ -8,8 +8,9 @@ type Props = {
 export const ThermoSVG = (props: Props) => {
 
     let temps = props.temps
+    let mojud = temps.temp1 !== undefined
 
-    return temps.temp1 !== undefined ? (
+    return (
         <svg className="h-full p-4 w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 651.15 704.08">
 
             <g id="4 thermometers">
@@ -892,5 +893,5 @@ export const ThermoSVG = (props: Props) => {
 
             </g>
         </svg>
-    ) : null
+    )
 }

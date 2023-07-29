@@ -7,11 +7,14 @@ type Props = {}
 export const Home = (props: Props) => {
 
   const [category, setCategory] = React.useState('all')
+  // const [filteredItems, setFilteredItems] = React.useState<any>([])
 
   // Function to filter items based on the selected category
-  const filteredItems = category === 'all'
-    ? games
-    : games.filter(item => item.cats.includes(category));
+    
+    let filteredItems =  category === 'all'
+        ? games
+        : games?.filter(item => item.cats.includes(category));
+
 
   return (
     <div className='max-w-6xl w-full grid mx-auto rounded-lg gap-8 my-4'>
@@ -24,7 +27,7 @@ export const Home = (props: Props) => {
         {cats.map((c, index) => (
           <div key={index}>
             <button
-              className='hover:scale-105 duration-300 p-2 lg:p-4 w-full bg-pink-50 shadow-lg text-sm sm:text-md lg:text-xl text-pink-600 font-semibold hover:bg-pink-100 hover:ring-2 ring-pink-400 rounded-sm'
+              className='p-2 lg:p-4 w-full bg-pink-50 shadow-lg text-sm sm:text-md lg:text-xl text-pink-600 font-semibold hover:bg-pink-100 hover:ring-2 ring-pink-400 rounded-sm'
               onClick={() => setCategory(c.value)}>
               {c.title}
             </button>
@@ -35,7 +38,7 @@ export const Home = (props: Props) => {
 
       {/* Games Selections  */}
       <div className='p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full justify-center gap-4'>
-        {filteredItems.map((g, index) => {
+        {filteredItems?.map((g: any, index: number) => {
           return (
             <GameCard
               key={index}
