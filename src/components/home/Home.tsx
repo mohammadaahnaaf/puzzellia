@@ -10,10 +10,10 @@ export const Home = (props: Props) => {
   // const [filteredItems, setFilteredItems] = React.useState<any>([])
 
   // Function to filter items based on the selected category
-    
-    let filteredItems =  category === 'all'
-        ? games
-        : games?.filter(item => item.cats.includes(category));
+
+  let filteredItems = category === 'all'
+    ? games
+    : games?.filter(item => item.cats.includes(category));
 
 
   return (
@@ -27,7 +27,7 @@ export const Home = (props: Props) => {
         {cats.map((c, index) => (
           <div key={index}>
             <button
-              className='p-2 lg:p-4 w-full bg-pink-50 shadow-lg text-sm sm:text-md lg:text-xl text-pink-600 font-semibold hover:bg-pink-100 hover:ring-2 ring-pink-400 rounded-sm'
+              className='p-2 lg:p-4 hover:scale-105 duration-300 w-full bg-pink-50 shadow-lg text-sm sm:text-md lg:text-xl text-pink-600 font-semibold hover:bg-pink-100 hover:ring-2 ring-pink-400 rounded-sm'
               onClick={() => setCategory(c.value)}>
               {c.title}
             </button>
@@ -45,7 +45,8 @@ export const Home = (props: Props) => {
               icon={g.icon}
               title={g.title}
               subtitle={g.subtitle}
-              link={g.link} />
+              link={g.link}
+            />
           )
         })}
       </div>
