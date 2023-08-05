@@ -158,7 +158,6 @@ export const Protractor = (props: Props) => {
                     leaveTo="opacity-0"
                 >
                     <div className='w-full col-span-5'>
-
                         <ChadaBoards boards={boards} shows={shows} />
                     </div>
                 </Transition>
