@@ -4,6 +4,8 @@ import { Fragment, useState } from 'react'
 import { Transition } from '@headlessui/react'
 import { Thermoc } from './boardData'
 import { ThermoBoards, ThermoSVG } from './index'
+import { saveAs } from 'file-saver';
+import JSZip from 'jszip';
 
 type Props = {}
 
@@ -36,7 +38,7 @@ export const Thermometer = (props: Props) => {
         setIsViewing(true)
     }
 
-    // download 
+    // download single
     async function handleDownload() {
 
         for (let i = 1; i <= limit; i++) {
@@ -57,6 +59,27 @@ export const Thermometer = (props: Props) => {
             URL.revokeObjectURL(url);
         }
     }
+
+    // download as zip
+
+    const generateSvg = (canvasId: any) => {
+        const canvas = document.getElementById(canvasId) as HTMLDivElement;
+        const svgData = new XMLSerializer().serializeToString(canvas);
+        return svgData;
+    };
+
+    const downloadZip = async () => {
+        const zip = new JSZip();
+
+        for (let i = 1; i <= limit; i++) {
+            const canvasId = `canvas${i}`;
+            const svg = generateSvg(canvasId);
+            zip.file(`svg-${i}.svg`, svg);
+        }
+
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        saveAs(zipBlob, `${name}.zip`);
+    };
 
     return (
         <div className='min-h-screen h-full'>
@@ -113,11 +136,11 @@ export const Thermometer = (props: Props) => {
                 <div className='col-span-5 lg:col-span-2 p-4 grid gap-2 items-start bg-pink-50 shadow-lg rounded-lg'>
                     {/* <h1 className='px-4 py-2 text-xl text-center text-pink-600'>Thermometer</h1> */}
 
+                    {/* config  */}
                     <div className='w-full p-4 bg-white rounded-md'>
                         <label htmlFor="name" className="flex pb-1 text-sm font-medium text-pink-600">Board Name</label>
                         <input type="text" value={name || ""} onChange={(e) => setName(e.target.value)} id="name" className="bg-pink-50 border border-pink-300 text-pink-600 placeholder:text-pink-300 text-sm rounded-sm outline-none border-none ring-1 focus:ring-2 ring-pink-600 w-full px-4 py-2" placeholder="enter a file name" required />
                     </div>
-
                     <div className='flex gap-2 w-full p-4 bg-white rounded-md justify-between'>
                         <div className='w-full'>
                             <label htmlFor="celcius" className="flex pb-1 text-sm font-medium text-pink-600">Celcius</label>
@@ -128,20 +151,29 @@ export const Thermometer = (props: Props) => {
                             <input type="number" id="fahrenheit" className="bg-pink-50 border border-pink-300 placeholder:text-pink-300 text-pink-600 text-sm rounded-sm outline-none border-none ring-1 focus:ring-2 ring-pink-600 w-full px-4 py-2" placeholder="fahrenheit" required />
                         </div>
                     </div>
+
+                    {/* generate sample  */}
                     <div>
                         <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={create} type='button'>Generate Sample</button>
                     </div>
+
+                    {/* numbers of boards  */}
                     <div className='flex gap-2 w-full p-4 bg-white rounded-md justify-between'>
                         <div className='w-full'>
                             <label htmlFor="downloads" className="flex pb-1 text-sm font-medium text-pink-600">Number of Boards</label>
                             <input type="number" value={limit || 1} onChange={(e) => setLimit(+e.target.value)} id="downloads" className="bg-pink-50 border border-pink-300 text-pink-600 placeholder:text-pink-300 text-sm rounded-sm outline-none border-none ring-1 focus:ring-2 ring-pink-600 w-full px-4 py-2" placeholder="boards" required />
                         </div>
                     </div>
+
+                    {/* download buttons  */}
                     <div className='grid gap-2'>
                         <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={createMulti} type='button'>Generate Boards</button>
 
-                        {boards.length >= 1 && (
-                            <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={handleDownload} type='button'>Download Boards</button>
+                        {boards.length === 1 && (
+                            <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={handleDownload} type='button'>Download Board</button>
+                        )}
+                        {boards.length > 1 && (
+                            <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={downloadZip} type='button'>Download Zip</button>
                         )}
                     </div>
                 </div>
