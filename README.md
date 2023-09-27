@@ -1,5 +1,5 @@
 <p align='center'>
-  <a href='https://puzzellia.vercel.app'><img src='public/puzzellia.svg' width='320' height='320' /></a>
+  <a href='https://puzzellia.vercel.app'><img src='public/puzzellia.svg' width='220' height='220' /></a>
 </p>
 
 <h1 align='center'>Welcome To Puzzellia GitHub</h1>
