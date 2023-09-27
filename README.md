@@ -2,9 +2,9 @@
   <a href='https://puzzellia.vercel.app'><img src='public/puzzellia.svg' width='320' height='320' /></a>
 </p>
 
-# Welcome To Puzzellia GitHub
+<h1 align='center'>Welcome To Puzzellia GitHub</h1>
 
-[![Next.js](https://img.shields.io/badge/Next.js-11.1.2-blue)](https://nextjs.org/) | [![TypeScript](https://img.shields.io/badge/TypeScript-4.4.3-blue)](https://www.typescriptlang.org/) | [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-2.2.16-blue)](https://tailwindcss.com/)
+[![Next.js](https://img.shields.io/badge/Next.js-11.1.2-blue)](https://nextjs.org/) [![TypeScript](https://img.shields.io/badge/TypeScript-4.4.3-blue)](https://www.typescriptlang.org/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-2.2.16-blue)](https://tailwindcss.com/)
 
 Puzzellia is a web app featuring a diverse range of educational games designed for kids. From mathematics and science puzzles to mazes and Sudoku, Puzzellia offers a playful environment for kids to enhance their IQ and learn various educational concepts.
 
