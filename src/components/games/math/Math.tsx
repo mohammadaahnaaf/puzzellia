@@ -1,31 +1,35 @@
 import React from 'react'
-import { Thermoc } from './boardData'
-import { ThermoSVG } from './ThermoSVG'
+import { Mathc } from './boardData'
 import { Boards } from '.'
 import Image from 'next/image'
+import { MathSVG } from './MathSVG'
 // import html2canvas from 'html2canvas';
 
 type Props = {}
 
-export const Thermometer = (props: Props) => {
+export const Math = (props: Props) => {
 
-    const [temps, setTemps] = React.useState<any>({})
-    const [boards, setBoards] = React.useState<any>([])
+    const [numbers, setNumbers] = React.useState<any[]>([])
+    const [total, setTotal] = React.useState<number>(0)
+    const [boards, setBoards] = React.useState<any[]>([])
     const [shows, setShows] = React.useState<boolean>(false)
     const [limit, setLimit] = React.useState<number>(1)
-    const [name, setName] = React.useState<string>("Thermometer")
+    const [digit, setDigit] = React.useState<number>(1)
+    const [num, setNum] = React.useState<number>(2)
+    const [name, setName] = React.useState<string>("Math")
 
     // create sample 
     async function create() {
-        let result = new Thermoc()
-        let data = result.makeData()
-        setTemps(data)
+        let result = new Mathc()
+        let { items, sum } = result.makeData(digit, num)
+        setNumbers(items)
+        setTotal(sum)
     }
 
     // create board 
     async function createMulti() {
-        let result = new Thermoc()
-        let multidata = result.makeMultiData(limit)
+        let result = new Mathc()
+        let multidata = result.makeMultiData(limit, digit, num)
         setBoards(multidata)
     }
 
@@ -67,7 +71,9 @@ export const Thermometer = (props: Props) => {
         // link.click();
         // document.body.removeChild(link);
     }
-    let mojud = temps?.temp1 !== undefined
+
+    let mojud = numbers?.length !== 0
+
     return (
         <div className='min-h-screen h-full'>
             <div className='grid grid-cols-5 max-w-6xl w-full gap-4 mx-auto p-4'>
@@ -78,7 +84,7 @@ export const Thermometer = (props: Props) => {
                 <div className='grid col-span-5 w-full lg:col-span-3 p-4 justify-center bg-pink-50 gap-4 rounded-lg shadow-lg'>
                     {mojud ? (
                         <div className='max-h-[46vh] w-[50vh]'>
-                            <ThermoSVG temps={temps} shows={shows} />
+                            <MathSVG numbers={numbers} digit={digit} total={total} shows={shows} />
                         </div>
                     ) : (
                         <div className='flex items-center'>
@@ -117,12 +123,12 @@ export const Thermometer = (props: Props) => {
 
                     <div className='flex gap-2 w-full p-4 bg-white rounded-md justify-between'>
                         <div className='w-full'>
-                            <label htmlFor="celcius" className="flex pb-1 text-sm font-medium text-pink-600">Celcius</label>
-                            <input type="number" id="celcius" className="bg-pink-50 border border-pink-300 placeholder:text-pink-300 text-pink-600 text-sm rounded-sm outline-none border-none ring-1 focus:ring-2 ring-pink-600 w-full px-4 py-2" placeholder="celcius" required />
+                            <label htmlFor="num" className="flex pb-1 text-sm font-medium text-pink-600">Numbers</label>
+                            <input type="number" value={num || ''} onChange={(e: any) => setNum(e.target.value)} id="num" className="bg-pink-50 border border-pink-300 placeholder:text-pink-300 text-pink-600 text-sm rounded-sm outline-none border-none ring-1 focus:ring-2 ring-pink-600 w-full px-4 py-2" placeholder="celcius" required />
                         </div>
                         <div className='w-full'>
-                            <label htmlFor="fahrenheit" className="flex pb-1 text-sm font-medium text-pink-600">Fahrenheit</label>
-                            <input type="number" id="fahrenheit" className="bg-pink-50 border border-pink-300 placeholder:text-pink-300 text-pink-600 text-sm rounded-sm outline-none border-none ring-1 focus:ring-2 ring-pink-600 w-full px-4 py-2" placeholder="fahrenheit" required />
+                            <label htmlFor="digit" className="flex pb-1 text-sm font-medium text-pink-600">Digit</label>
+                            <input type="number" value={digit || ''} onChange={(e: any) => setDigit(e.target.value)} id="digit" className="bg-pink-50 border border-pink-300 placeholder:text-pink-300 text-pink-600 text-sm rounded-sm outline-none border-none ring-1 focus:ring-2 ring-pink-600 w-full px-4 py-2" placeholder="fahrenheit" required />
                         </div>
                     </div>
                     <div>
@@ -143,7 +149,7 @@ export const Thermometer = (props: Props) => {
                     </div>
                 </div>
 
-                <Boards boards={boards} shows={shows} />
+                <Boards digit={digit} boards={boards} shows={shows} />
 
             </div>
         </div>

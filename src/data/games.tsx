@@ -1,5 +1,5 @@
-import { Maze, Thermometer } from '@puzzellia/games'
-import { Protractor } from '@puzzellia/games/protractor'
+import { Maze, Protractor, Thermometer } from '@puzzellia/games'
+import { Math } from '@puzzellia/games/math'
 
 interface GameItem {
     title: string
@@ -57,7 +57,7 @@ export const games: GameItem[] = [
         icon: '/icons/math-2.svg',
         link: 'math-game',
         cats: ['measuring', 'number', 'math'],
-        gameia: <Thermometer />
+        gameia: <Math />
     },
     {
         title: "Geomatry",

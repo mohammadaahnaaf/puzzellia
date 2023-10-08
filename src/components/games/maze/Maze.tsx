@@ -1,32 +1,76 @@
 import React from 'react'
-import { Thermoc } from './boardData'
-import { MazeSVG } from './MazeSVG'
-import { MazeBoards } from '.'
+// import { Mazec } from './boardData'
+// import { MazeSVG } from './MazeSVG'
+import { MazeBoards, MazeSVG } from '.'
 import Image from 'next/image'
+import { Cell, MazeGenerator, MazeSolver } from './boardData';
 // import html2canvas from 'html2canvas';
 
 type Props = {}
+const CELL_SIZE = 20;
 
 export const Maze = (props: Props) => {
 
-    const [temps, setTemps] = React.useState<any>({})
+    const [mazes, setMazes] = React.useState<any[]>([])
     const [boards, setBoards] = React.useState<any>([])
     const [shows, setShows] = React.useState<boolean>(false)
     const [limit, setLimit] = React.useState<number>(1)
     const [name, setName] = React.useState<string>("Maze")
+    const canvasRef = React.useRef<HTMLDivElement>(null);
+    const rows = 10; // Number of rows in the maze
+    const cols = 10; // Number of columns in the maze
 
+    React.useEffect(() => {
+    
+      const mazeSolver = new MazeSolver(mazes);
+      const solution: [number, number][] = mazeSolver.solveMaze();
+  
+      // Render the maze and its solution using SVG
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', `${cols * CELL_SIZE}`);
+      svg.setAttribute('height', `${rows * CELL_SIZE}`);
+  
+      // Render maze
+      mazes.forEach((row:any[], i) => {
+        row.forEach((cell, j) => {
+          const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          rect.setAttribute('x', `${j * CELL_SIZE}`);
+          rect.setAttribute('y', `${i * CELL_SIZE}`);
+          rect.setAttribute('width', `${CELL_SIZE}`);
+          rect.setAttribute('height', `${CELL_SIZE}`);
+          rect.setAttribute('fill', cell ? 'black' : 'white');
+          svg.appendChild(rect);
+        });
+      });
+  
+      // Render solution
+      solution.forEach(([i, j]) => {
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', `${j * CELL_SIZE + 2}`);
+        rect.setAttribute('y', `${i * CELL_SIZE + 2}`);
+        rect.setAttribute('width', `${CELL_SIZE - 4}`);
+        rect.setAttribute('height', `${CELL_SIZE - 4}`);
+        rect.setAttribute('fill', 'green');
+        svg.appendChild(rect);
+      });
+  
+      if (canvasRef.current) {
+        canvasRef.current.appendChild(svg);
+      }
+    }, []);
+    
     // create sample 
     async function create() {
-        let result = new Thermoc()
-        let data = result.makeData()
-        setTemps(data)
+        const mazeGenerator = new MazeGenerator(rows, cols);
+        const maze: Cell[][] = mazeGenerator.generateMaze();
+        setMazes(maze)
     }
 
     // create board 
     async function createMulti() {
-        let result = new Thermoc()
-        let multidata = result.makeMultiData(limit)
-        setBoards(multidata)
+        // let result = new Mazec()
+        // let multidata = result.makeMultiData(limit)
+        // setBoards(multidata)
     }
 
     // download 
@@ -67,7 +111,8 @@ export const Maze = (props: Props) => {
         // link.click();
         // document.body.removeChild(link);
     }
-    let mojud = temps?.temp1 !== undefined
+    let mojud = false
+
     return (
         <div className='min-h-screen h-full'>
             <div className='grid grid-cols-5 max-w-6xl w-full gap-4 mx-auto p-4'>
@@ -78,7 +123,8 @@ export const Maze = (props: Props) => {
                 <div className='grid col-span-5 w-full lg:col-span-3 p-4 justify-center bg-pink-50 gap-4 rounded-lg shadow-lg'>
                     {mojud ? (
                         <div className='max-h-[46vh] w-[50vh]'>
-                            <MazeSVG temps={temps} shows={shows} />
+                              Comming Soon...
+                            {/* <MazeSVG canvasRef ={canvasRef}/> */}
                         </div>
                     ) : (
                         <div className='flex items-center'>
@@ -117,12 +163,12 @@ export const Maze = (props: Props) => {
 
                     <div className='flex gap-2 w-full p-4 bg-white rounded-md justify-between'>
                         <div className='w-full'>
-                            <label htmlFor="celcius" className="flex pb-1 text-sm font-medium text-pink-600">Celcius</label>
-                            <input type="number" id="celcius" className="bg-pink-50 border border-pink-300 placeholder:text-pink-300 text-pink-600 text-sm rounded-sm outline-none border-none ring-1 focus:ring-2 ring-pink-600 w-full px-4 py-2" placeholder="celcius" required />
+                            <label htmlFor="celcius" className="flex pb-1 text-sm font-medium text-pink-600">Level</label>
+                            <input type="number" id="celcius" className="bg-pink-50 border border-pink-300 placeholder:text-pink-300 text-pink-600 text-sm rounded-sm outline-none border-none ring-1 focus:ring-2 ring-pink-600 w-full px-4 py-2" placeholder="Level" required />
                         </div>
                         <div className='w-full'>
-                            <label htmlFor="fahrenheit" className="flex pb-1 text-sm font-medium text-pink-600">Fahrenheit</label>
-                            <input type="number" id="fahrenheit" className="bg-pink-50 border border-pink-300 placeholder:text-pink-300 text-pink-600 text-sm rounded-sm outline-none border-none ring-1 focus:ring-2 ring-pink-600 w-full px-4 py-2" placeholder="fahrenheit" required />
+                            <label htmlFor="shape" className="flex pb-1 text-sm font-medium text-pink-600">Shape</label>
+                            <input type="text" id="shape" className="bg-pink-50 border border-pink-300 placeholder:text-pink-300 text-pink-600 text-sm rounded-sm outline-none border-none ring-1 focus:ring-2 ring-pink-600 w-full px-4 py-2" placeholder="Shape" required />
                         </div>
                     </div>
                     <div>

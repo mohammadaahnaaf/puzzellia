@@ -1,65 +1,63 @@
-export class Thermoc {
+export class Mathc {
 
-    constructor() {
-        // this.total = total;
-    }
+    constructor() { }
 
     //create a random data 
-    makeData() {
+    makeData(d: number, n: number): { items: number[], sum: number } {
 
-        function generateUniqueRandom(existingNumbers: any[], low: number, high: number) {
-            let num;
-            do {
-                num = Math.floor(Math.random() * (high - low + 1)) + low;
-            } while (existingNumbers.includes(num));
+        function generateNumbers(d: number, n: number): number[] {
+            const items: number[] = [];
+            const maxDigit = Math.pow(10, d) - 1;
 
-            return num;
+            for (let i = 0; i < n; i++) {
+                const num = Math.floor(Math.random() * (maxDigit + 1));
+                items.push(num);
+            }
+
+            return items;
         }
 
-        // Generate 4 unique random numbers in the range of 0 to 100
-        let existingNumbers = [];
-        let temps: any = {};
-
-        for (let i = 1; i <= 4; i++) {
-            const num = generateUniqueRandom(existingNumbers, 0, 100);
-            existingNumbers.push(num);
-            temps[`temp${i}`] = num;
+        function calculateSum(numbers: number[]): number {
+            return numbers.reduce((sum, num) => sum + num, 0);
         }
-        return temps
 
+        const items = generateNumbers(d, n);
+        const sum = calculateSum(items);
+        return { items, sum };
     }
 
     //create multi random data 
-    makeMultiData(total: number) {
+    makeMultiData(limit: number, d: number, n: number) {
 
-        function make() {
-            function generateUniqueRandom(existingNumbers: any[], low: number, high: number) {
-                let num;
-                do {
-                    num = Math.floor(Math.random() * (high - low + 1)) + low;
-                } while (existingNumbers.includes(num));
+        function generateNumbers(d: number, n: number): number[] {
+            const items: number[] = [];
+            const maxDigit = Math.pow(10, d) - 1;
 
-                return num;
+            for (let i = 0; i < n; i++) {
+                const num = Math.floor(Math.random() * (maxDigit + 1));
+                items.push(num);
             }
 
-            // Generate 4 unique random numbers in the range of 0 to 100
-            let existingNumbers = [];
-            let temps: any = {};
+            return items;
+        }
 
-            for (let i = 1; i <= 4; i++) {
-                const num = generateUniqueRandom(existingNumbers, 0, 100);
-                existingNumbers.push(num);
-                temps[`temp${i}`] = num;
+        function calculateSum(numbers: number[]): number {
+            return numbers.reduce((sum, num) => sum + num, 0);
+        }
+
+        const results: { items: number[], sum: number }[] = [];
+
+        for (let i = 0; i < limit; i++) {
+            const items = generateNumbers(d, n);
+            const sum = calculateSum(items);
+            results.push({ items, sum });
+            if (results.length === limit) {
+                return results;
             }
-            return temps
         }
 
-        let multiData = []
-        for (let i = 1; i <= total; i++) {
-            let x = make();
-            multiData.push(x);
-        }
-        return multiData
+        return results;
+
     }
 
 }
