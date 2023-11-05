@@ -1,19 +1,19 @@
 import React from 'react'
 import { Thermoc } from './boardData'
-import { ThermoSVG } from './ThermoSVG'
+import { SudokuSVG} from './SudokuSVG'
 import { Boards } from '.'
 import Image from 'next/image'
 // import html2canvas from 'html2canvas';
 
 type Props = {}
 
-export const Thermometer = (props: Props) => {
+export const Sudoku = (props: Props) => {
 
     const [temps, setTemps] = React.useState<any>({})
     const [boards, setBoards] = React.useState<any>([])
     const [shows, setShows] = React.useState<boolean>(false)
     const [limit, setLimit] = React.useState<number>(1)
-    const [name, setName] = React.useState<string>("Thermometer")
+    const [name, setName] = React.useState<string>("Sudoku")
 
     // create sample 
     async function create() {
@@ -50,40 +50,26 @@ export const Thermometer = (props: Props) => {
             URL.revokeObjectURL(url);
 
         }
-
-        // const canvas = document.getElementById(canvasId) as HTMLDivElement;
-
-        // // Convert the HTML/SVG content to a canvas
-        // const canvasElement = await html2canvas(canvas, { scale: 2 });
-
-        // // Convert the canvas to a data URL in PNG format
-        // const dataUrl = canvasElement.toDataURL('image/png');
-
-        // // Create a temporary anchor element to trigger the download
-        // const link = document.createElement('a');
-        // link.href = dataUrl;
-        // link.download = 'canvas.png';
-        // document.body.appendChild(link);
-        // link.click();
-        // document.body.removeChild(link);
     }
+
     let mojud = temps?.temp1 !== undefined
+    
     return (
         <div className='min-h-screen h-full'>
             <div className='grid grid-cols-5 max-w-6xl w-full gap-4 mx-auto p-4'>
 
                 <div className='col-span-5'>
-                    <h1 className='px-4 py-2 text-2xl font-bold text-[#EE2345]'>Thermometer</h1>
+                    <h1 className='px-4 py-2 text-2xl font-bold text-[#EE2345]'>Sudoku</h1>
                 </div>
                 <div className='grid col-span-5 w-full lg:col-span-3 p-4 justify-center bg-pink-50 gap-4 rounded-lg shadow-lg'>
                     {mojud ? (
                         <div className='max-h-[46vh] w-[50vh]'>
-                            <ThermoSVG temps={temps} shows={shows} />
+                            <SudokuSVG temps={temps} shows={shows} />
                         </div>
                     ) : (
                         <div className='flex items-center'>
                             <div className='relative h-40 w-40 mx-auto'>
-                                <Image fill src='/icons/thermometer.svg' className='object-center h-full w-full' alt='games-icon' />
+                                <Image fill src='/icons/puzzle.svg' className='object-center h-full w-full' alt='games-icon' />
                             </div>
                         </div>
                     )}

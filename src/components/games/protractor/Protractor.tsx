@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { Chadac } from './boardData'
 import { ChadaBoards, ChadaSVG } from './index'
 import { Transition } from '@headlessui/react'
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver';
 
 type Props = {}
 
@@ -33,7 +35,7 @@ export const Protractor = (props: Props) => {
         setIsViewing(true)
     }
 
-    // download 
+    // single download 
     async function handleDownload() {
 
         for (let i = 1; i <= limit; i++) {
@@ -55,6 +57,28 @@ export const Protractor = (props: Props) => {
         }
     }
 
+    // download as zip
+
+    const generateSvg = (canvasId: any) => {
+        const canvas = document.getElementById(canvasId) as HTMLDivElement;
+        const svgData = new XMLSerializer().serializeToString(canvas);
+        return svgData;
+    };
+
+    const downloadZip = async () => {
+        const zip = new JSZip();
+
+        for (let i = 1; i <= limit; i++) {
+            const canvasId = `canvas${i}`;
+            const svg = generateSvg(canvasId);
+            zip.file(`svg-${i}.svg`, svg);
+        }
+
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        saveAs(zipBlob, `${name}.zip`);
+    };
+
+
     let mojud = items.length >= 1
 
     return (
@@ -64,7 +88,7 @@ export const Protractor = (props: Props) => {
                 <div className='col-span-5'>
                     <h1 className='px-4 py-2 text-2xl font-bold text-[#EE2345]'>Protractor</h1>
                 </div>
-                
+
                 <div className='grid col-span-5 w-full lg:col-span-3 p-4 justify-center bg-pink-50 gap-4 rounded-lg shadow-lg'>
 
                     <Transition
@@ -141,27 +165,19 @@ export const Protractor = (props: Props) => {
                     <div className='grid gap-2'>
                         <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={createMulti} type='button'>Generate Boards</button>
 
-                        {boards.length >= 1 && (
-                            <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={handleDownload} type='button'>Download Boards</button>
+                        {/* download buttons  */}
+                        {boards.length === 1 && (
+                            <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={handleDownload} type='button'>Download Board</button>
+                        )}
+                        {boards.length > 1 && (
+                            <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={downloadZip} type='button'>Download Zip</button>
                         )}
                     </div>
                 </div>
 
-                <Transition
-                    as={Fragment}
-                    show={isViewing}
-                    enter="transition-opacity duration-500"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="transition-opacity duration-300"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                >
-                    <div className='w-full col-span-5'>
-                        <ChadaBoards boards={boards} shows={shows} />
-                    </div>
-                </Transition>
-
+                <div className='w-full col-span-5'>
+                    <ChadaBoards boards={boards} shows={shows} />
+                </div>
             </div>
         </div>
     )

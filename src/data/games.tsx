@@ -1,4 +1,4 @@
-import { Maze, Protractor, Thermometer } from '@puzzellia/games'
+import { Maze, Protractor, Thermometer, Sudoku } from '@puzzellia/games'
 import { Math } from '@puzzellia/games/math'
 
 interface GameItem {
@@ -7,26 +7,10 @@ interface GameItem {
     icon: string
     link: string
     cats: string[]
-    gameia: React.ReactNode; 
+    gameia: React.ReactNode;
 }
 
 export const games: GameItem[] = [
-    {
-        title: "Maze",
-        subtitle: "Find the way out of the box.",
-        icon: '/icons/maze.svg',
-        link: 'maze',
-        cats: ['soduko', 'line', 'puzzle', 'visual'],
-        gameia: <Maze />
-    },
-    {
-        title: "Sudoku",
-        subtitle: "Find the next number.",
-        icon: '/icons/puzzle.svg',
-        link: 'sudoku',
-        cats: ['soduko', 'line', 'puzzle', 'visual'],
-        gameia: <Thermometer />
-    },
     {
         title: "Thermometer",
         subtitle: "Guess the thermometer reading.",
@@ -44,20 +28,36 @@ export const games: GameItem[] = [
         gameia: <Protractor />
     },
     {
-        title: "Number",
-        subtitle: "Find the sequence of numbers.",
-        icon: '/icons/math.svg',
-        link: 'number-game',
-        cats: ['measuring', 'number'],
-        gameia: <Thermometer />
-    },
-    {
         title: "Math",
         subtitle: "Lets find out your math knowlwdge.",
         icon: '/icons/math-2.svg',
         link: 'math-game',
         cats: ['measuring', 'number', 'math'],
         gameia: <Math />
+    },
+    {
+        title: "Maze",
+        subtitle: "Find the way out of the box.",
+        icon: '/icons/maze.svg',
+        link: 'maze',
+        cats: ['soduko', 'line', 'puzzle', 'visual'],
+        gameia: <Maze />
+    },
+    {
+        title: "Sudoku",
+        subtitle: "Find the next number.",
+        icon: '/icons/puzzle.svg',
+        link: 'sudoku',
+        cats: ['soduko', 'line', 'puzzle', 'visual'],
+        gameia: <Sudoku />
+    },
+    {
+        title: "Number",
+        subtitle: "Find the sequence of numbers.",
+        icon: '/icons/math.svg',
+        link: 'number-game',
+        cats: ['measuring', 'number'],
+        gameia: <Thermometer />
     },
     {
         title: "Geomatry",

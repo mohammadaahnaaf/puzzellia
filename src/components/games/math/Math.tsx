@@ -3,7 +3,8 @@ import { Mathc } from './boardData'
 import { Boards } from '.'
 import Image from 'next/image'
 import { MathSVG } from './MathSVG'
-// import html2canvas from 'html2canvas';
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver';
 
 type Props = {}
 
@@ -33,7 +34,7 @@ export const Math = (props: Props) => {
         setBoards(multidata)
     }
 
-    // download 
+    // single download 
     async function handleDownload() {
 
         for (let i = 1; i <= limit; i++) {
@@ -52,25 +53,29 @@ export const Math = (props: Props) => {
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
+        }
+    }
 
+    // download as zip
+
+    const generateSvg = (canvasId: any) => {
+        const canvas = document.getElementById(canvasId) as HTMLDivElement;
+        const svgData = new XMLSerializer().serializeToString(canvas);
+        return svgData;
+    };
+
+    const downloadZip = async () => {
+        const zip = new JSZip();
+
+        for (let i = 1; i <= limit; i++) {
+            const canvasId = `canvas${i}`;
+            const svg = generateSvg(canvasId);
+            zip.file(`svg-${i}.svg`, svg);
         }
 
-        // const canvas = document.getElementById(canvasId) as HTMLDivElement;
-
-        // // Convert the HTML/SVG content to a canvas
-        // const canvasElement = await html2canvas(canvas, { scale: 2 });
-
-        // // Convert the canvas to a data URL in PNG format
-        // const dataUrl = canvasElement.toDataURL('image/png');
-
-        // // Create a temporary anchor element to trigger the download
-        // const link = document.createElement('a');
-        // link.href = dataUrl;
-        // link.download = 'canvas.png';
-        // document.body.appendChild(link);
-        // link.click();
-        // document.body.removeChild(link);
-    }
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        saveAs(zipBlob, `${name}.zip`);
+    };
 
     let mojud = numbers?.length !== 0
 
@@ -89,7 +94,7 @@ export const Math = (props: Props) => {
                     ) : (
                         <div className='flex items-center'>
                             <div className='relative h-40 w-40 mx-auto'>
-                                <Image fill src='/icons/thermometer.svg' className='object-center h-full w-full' alt='games-icon' />
+                                <Image fill src='/icons/math-2.svg' className='object-center h-full w-full' alt='games-icon' />
                             </div>
                         </div>
                     )}
@@ -143,8 +148,12 @@ export const Math = (props: Props) => {
                     <div className='grid gap-2'>
                         <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={createMulti} type='button'>Generate Boards</button>
 
-                        {boards.length >= 1 && (
-                            <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={handleDownload} type='button'>Download Boards</button>
+                        {/* download buttons  */}
+                        {boards.length === 1 && (
+                            <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={handleDownload} type='button'>Download Board</button>
+                        )}
+                        {boards.length > 1 && (
+                            <button className='py-2 text-center text-white bg-pink-600 w-full rounded-md hover:bg-black' onClick={downloadZip} type='button'>Download Zip</button>
                         )}
                     </div>
                 </div>

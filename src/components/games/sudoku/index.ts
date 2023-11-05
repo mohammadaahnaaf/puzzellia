@@ -1,2 +1,2 @@
-export * from './Thermometer'
+export * from './Sudoku'
 export * from './Boards'
