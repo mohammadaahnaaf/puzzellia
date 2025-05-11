@@ -39,8 +39,8 @@ export function Wordle() {
       const words = line.match(/[A-Z]{2,}/g);
       if (words) {
         for (const word of words) {
-          if (await validateWord(word)) {
-            setValidWords((prev) => [...prev, word]);
+          if ((await validateWord(word)) && !validWords.includes(word)) {
+            setValidWords((prevWords) => [...prevWords, word]);
           }
         }
       }
@@ -56,8 +56,8 @@ export function Wordle() {
       const words = columnStr.match(/[A-Z]{2,}/g);
       if (words) {
         for (const word of words) {
-          if (await validateWord(word)) {
-            setValidWords((prev) => [...prev, word]);
+          if ((await validateWord(word)) && !validWords.includes(word)) {
+            setValidWords((prevWords) => [...prevWords, word]);
           }
         }
       }
@@ -136,7 +136,7 @@ export function Wordle() {
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-2 p-4 ring-2 ring-pink-300 bg-pink-50 text-pink-600 rounded-md">
+        <div className="flex max-h-[300px] overflow-y-auto flex-col gap-2 p-4 ring-2 ring-pink-300 bg-pink-50 text-pink-600 rounded-md">
           <h2 className="text-lg font-semibold text-center">Valid Words</h2>
           {validWords.map((word, index) => (
             <div key={word}>
